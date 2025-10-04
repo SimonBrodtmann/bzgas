@@ -15,8 +15,8 @@ data.raw["utility-constants"]["default"].main_menu_simulations["gas-rig"] = {
   [[
     local logo = game.surfaces.nauvis.find_entities_filtered{
       name = "factorio-logo-16tiles", limit = 1}[1]
-    game.camera_position = {logo.position.x, logo.position.y+14}
-    game.camera_zoom = 0.75
+    game.simulation.camera_position = {logo.position.x, logo.position.y+14}
+    game.simulation.camera_zoom = 0.75
     game.tick_paused = false
     game.surfaces.nauvis.daytime = 0
   ]],

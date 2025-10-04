@@ -13,16 +13,16 @@ data:extend({
     icon_size = 128,
     subgroup = "raw-material",
     order = "g[bakelite]",
-    stack_size = util.get_stack_size(100),
+    stack_size = 100,
   },
   {
     type = "recipe",
     name = "bakelite",
     category = "chemistry",
     main_product = "bakelite",
-    enabled = "false",
+    enabled = false,
     ingredients = {
-      {util.me.use_phenol() and "phenol" or "coal", 1},
+      {type = "item", name = util.me.use_phenol() and "phenol" or "coal", amount = 1},
       {type="fluid", name="formaldehyde", amount=10}
     },
     energy_required = 2,

@@ -5,13 +5,13 @@ data:extend({
   {
     type = "recipe",
     name = "basic-chemical-plant",
-    result = "basic-chemical-plant",
+    results = {{ type = "item", name = "basic-chemical-plant", amount = 1}},
     enabled = false,
     ingredients = {
-      {"stone-brick", 5},
-      {"iron-plate", 4},
-      {"copper-plate", 4},
-      {"pipe", 6},
+      {type="item", name="stone-brick", amount=5},
+      {type="item", name="iron-plate", amount=4},
+      {type="item", name="copper-plate", amount=4},
+      {type="item", name="pipe", amount=6},
     },
   }
 })
@@ -19,7 +19,7 @@ data:extend({
 util.add_ingredient("basic-chemical-plant", "lead-plate", 4)
 util.replace_ingredient("basic-chemical-plant", "iron-plate", "aluminum-plate")
 util.replace_ingredient("basic-chemical-plant", "copper-plate", "tin-plate")
-util.replace_ingredient("basic-chemical-plant", "stone-brick", "sand", 10)
+util.replace_ingredient("basic-chemical-plant", "stone-brick", mods["Krastorio2"] and "kr-sand" or "sand", 10)
 util.replace_ingredient("basic-chemical-plant", "stone-brick", "silica", 10)
 
 -- item
@@ -45,16 +45,12 @@ end
 local plant_e = futil.table.deepcopy(data.raw["assembling-machine"]["chemical-plant"])
 plant_e.name = "basic-chemical-plant"
 plant_e.minable = {mining_time = 0.5, result = "basic-chemical-plant"}
-plant_e.module_specification = {module_slots = 0}
-plant_e.working_visualisations = {plant_e.working_visualisations[1], plant_e.working_visualisations[2]} -- no smoke
-plant_e.animation.north.layers[1].filename="__bzgas__/graphics/entity/chemical-plant.png"
-plant_e.animation.north.layers[1].hr_version.filename="__bzgas__/graphics/entity/hr-chemical-plant.png"
-plant_e.animation.south.layers[1].filename="__bzgas__/graphics/entity/chemical-plant.png"
-plant_e.animation.south.layers[1].hr_version.filename="__bzgas__/graphics/entity/hr-chemical-plant.png"
-plant_e.animation.east.layers[1].filename="__bzgas__/graphics/entity/chemical-plant.png"
-plant_e.animation.east.layers[1].hr_version.filename="__bzgas__/graphics/entity/hr-chemical-plant.png"
-plant_e.animation.west.layers[1].filename="__bzgas__/graphics/entity/chemical-plant.png"
-plant_e.animation.west.layers[1].hr_version.filename="__bzgas__/graphics/entity/hr-chemical-plant.png"
+plant_e.module_slots = 0
+plant_e.graphics_set.working_visualisations = {plant_e.graphics_set.working_visualisations[1], plant_e.graphics_set.working_visualisations[2]} -- no smoke
+plant_e.graphics_set.animation.north.layers[1].filename="__bzgas__/graphics/entity/hr-chemical-plant.png"
+plant_e.graphics_set.animation.south.layers[1].filename="__bzgas__/graphics/entity/hr-chemical-plant.png"
+plant_e.graphics_set.animation.east.layers[1].filename="__bzgas__/graphics/entity/hr-chemical-plant.png"
+plant_e.graphics_set.animation.west.layers[1].filename="__bzgas__/graphics/entity/hr-chemical-plant.png"
 plant_e.next_upgrade="chemical-plant"
 plant_e.icon = nil
 plant_e.icon_size = nil
@@ -68,7 +64,7 @@ plant_e.energy_source = {
   type = "burner",
   fuel_inventory_size = 1,
   effectivity = 1,
-  emissions_per_minute = 5,
+  emissions_per_minute = { pollution = 5 },
   fuel_categories = {"chemical"},
   smoke = {
     {
@@ -83,15 +79,5 @@ plant_e.energy_source = {
     },
   },
 }
--- NOTE: Saving alternate tint here in case this is needed.
--- local ptint = {r=.7,g=0.7,b=0.9,a=1}
--- plant_e.animation.north.layers[1].tint = ptint
--- plant_e.animation.north.layers[1].hr_version.tint = ptint
--- plant_e.animation.south.layers[1].tint = ptint
--- plant_e.animation.south.layers[1].hr_version.tint = ptint
--- plant_e.animation.east.layers[1].tint = ptint
--- plant_e.animation.east.layers[1].hr_version.tint = ptint
--- plant_e.animation.west.layers[1].tint = ptint
--- plant_e.animation.west.layers[1].hr_version.tint = ptint
 data.raw["assembling-machine"]["basic-chemical-plant"] = plant_e
 -- end entity

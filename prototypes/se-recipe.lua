@@ -49,6 +49,6 @@ if util.se6() then
   util.add_unlock("se-space-biochemical-laboratory", "methane-pre-reforming")
   util.add_unlock("se-space-biochemical-laboratory", "formaldehyde-methane")
   if data.raw.fluid["se-methane-gas"] then
-    data.raw.fluid["se-methane-gas"].fuel_value = "1000KJ"
+    data.raw.fluid["se-methane-gas"].fuel_value = "1000kJ"
   end
 end

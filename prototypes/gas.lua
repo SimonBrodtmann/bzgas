@@ -1,8 +1,11 @@
 local resource_autoplace = require('resource-autoplace');
-local noise = require('noise');
 
 local util = require("data-util");
 local futil = require("util")
+
+data.raw.planet.nauvis.map_gen_settings.autoplace_controls["gas"] = {}
+data.raw.planet.nauvis.map_gen_settings.autoplace_settings.entity.settings["gas"] = {}
+resource_autoplace.initialize_patch_set("gas", true)
 
 data:extend({ {type = "resource-category", name="gas"} })
 data:extend({
@@ -12,10 +15,6 @@ data:extend({
     name = "gas",
     richness = true,
     order = "b-ez"
-	},
-	{
-    type = "noise-layer",
-    name = "gas"
 	},
   {
     type = "resource",
@@ -71,53 +70,29 @@ data:extend({
     {
       sheet =
       {
-        filename = "__bzgas__/graphics/entity/ores/gas.png",
+        filename = "__bzgas__/graphics/entity/ores/hr-gas.png",
         priority = "extra-high",
-        width = 64,
-        height = 64,
+        width = 128,
+        height = 128,
         frame_count = 4,
         variation_count = 1,
         shift = futil.by_pixel(0, -12),
-        scale = 0.75,
-        hr_version =
-        {
-          filename = "__bzgas__/graphics/entity/ores/hr-gas.png",
-          priority = "extra-high",
-          width = 128,
-          height = 128,
-          frame_count = 4,
-          variation_count = 1,
-          shift = futil.by_pixel(0, -12),
-          scale = 0.5*0.75,
-        }
+        scale = 0.5*0.75,
       }
     },
     stages_effect =
     {
       sheet =
       {
-        filename = "__bzgas__/graphics/entity/ores/gas-effect.png",
+        filename = "__bzgas__/graphics/entity/ores/hr-gas-effect.png",
         priority = "extra-high",
-        width = 64,
-        height = 64,
+        width = 128,
+        height = 128,
         frame_count = 4,
         variation_count = 1,
-        shift = futil.by_pixel(0, -12),
-        scale = 0.75,
+        shift = futil.by_pixel(0, -17),
         blend_mode = "normal",
-        hr_version =
-        {
-          filename = "__bzgas__/graphics/entity/ores/hr-gas-effect.png",
-          priority = "extra-high",
-          width = 128,
-          height = 128,
-          frame_count = 4,
-          variation_count = 1,
-          shift = futil.by_pixel(0, -17),
-          scale = 0.5,
-          blend_mode = "normal",
-          scale = 0.5*0.75,
-        }
+        scale = 0.5*0.75,
       }
     },
     effect_animation_period = 3.5,
@@ -130,8 +105,8 @@ data:extend({
     type = "fluid",
     name = "gas",
     default_temperature = 25,
-    heat_capacity = "0.1KJ",
-    fuel_value = "1000KJ",
+    heat_capacity = "0.1kJ",
+    fuel_value = "1000kJ",
     emissions_multiplier = util.se6() and 1.1 or 0.75,
     base_color = {r=0.67, g=0.87, b=0.77},
     flow_color = {r=0.67, g=0.87, b=0.87},

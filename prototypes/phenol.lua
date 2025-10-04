@@ -8,18 +8,18 @@ data:extend({
     name = "phenol",
     icon = "__bzgas__/graphics/icons/phenol.png", icon_size = 128,
     pictures = {
-      {filename = "__bzgas__/graphics/icons/phenol.png",   size = 128, scale = 0.125},
-      {filename = "__bzgas__/graphics/icons/phenol-2.png", size = 128, scale = 0.125},
-      {filename = "__bzgas__/graphics/icons/phenol-3.png", size = 128, scale = 0.125},
-      {filename = "__bzgas__/graphics/icons/phenol-4.png", size = 128, scale = 0.125},
+      {filename = "__bzgas__/graphics/icons/phenol.png",   size = 128, scale = 0.25},
+      {filename = "__bzgas__/graphics/icons/phenol-2.png", size = 128, scale = 0.25},
+      {filename = "__bzgas__/graphics/icons/phenol-3.png", size = 128, scale = 0.25},
+      {filename = "__bzgas__/graphics/icons/phenol-4.png", size = 128, scale = 0.25},
     },
     subgroup = "raw-material",
     order = "g[phenol]",
-    stack_size = util.get_stack_size(100),
+    stack_size = 100,
   },
 })
 
-if data.raw.item["coke"] then
+if data.raw.item[mods["Krastorio2"] and "kr-coke" or "coke"] then
   local cat
   if mods.Krastorio2 then
     cat  = "smelting"
@@ -36,14 +36,14 @@ if data.raw.item["coke"] then
         name = "phenol",
         category = cat,
         main_product = "phenol",
-        enabled = "false",
+        enabled = false,
         icon = "__bzgas__/graphics/icons/phenol.png", icon_size = 128,
-        ingredients = {{"coal", 6}, {"wood", 6}},
+        ingredients = {{type="item", name="coal", amount=6}, {type="item", name="wood", amount=6}},
         energy_required = 16,
         subgroup = "raw-material",
         results = {
           {type="item", name="phenol", amount = 6},
-          {type="item", name="coke", amount = 3},
+          {type="item", name="kr-coke", amount = 3},
         },
       }
     })
@@ -54,9 +54,9 @@ if data.raw.item["coke"] then
         name = "phenol",
         category = cat,
         main_product = "phenol",
-        enabled = "false",
+        enabled = false,
 		     icon = "__bzgas__/graphics/icons/phenol.png", icon_size = 128,
-        ingredients = {{"coal", 4}},
+        ingredients = {{type="item", name="coal", amount=4}},
         energy_required = 6.4,
 		     subgroup = "raw-material",
         results = {
@@ -83,9 +83,10 @@ if data.raw.item["coke"] then
     {
       type = "recipe",
       name = "phenol-from-oil",
+      localised_name = { "item-name.phenol" },
       main_product = "phenol",
       category = "chemistry",
-      enabled = "false",
+      enabled = false,
       icons = {
         {icon = "__bzgas__/graphics/icons/phenol.png", icon_size = 128},
         light_oil_icon,
@@ -107,9 +108,9 @@ else
       name = "phenol",
       category = "advanced-crafting",
       main_product = "phenol",
-      enabled = "false",
+      enabled = false,
       energy_required = 1,
-      ingredients = {{"coal", 1}},
+      ingredients = {{type="item", name="coal", amount=1}},
       results = {
         {type="item", name="phenol", amount=1},
       },

@@ -1700,9 +1700,6 @@ end
 
 set_shift =  function(shift, tab)
 	tab.shift = shift
-	if tab.hr_version then
-		tab.hr_version.shift = shift
-	end
 	return tab
 end
 
@@ -1729,16 +1726,10 @@ end
 
 empty_sprite = function()
 	return {
-		filename = "__core__/graphics/empty.png",
-		priority = "extra-high",
-		width = 1,
-		height = 1,
-		hr_version = {
-			filename = "__core__/graphics/empty.png",
-			priority = "extra-high",
-			width = 1,
-			height = 1,
-		}
+    filename = "__core__/graphics/empty.png",
+    priority = "extra-high",
+    width = 1,
+    height = 1,
 	}
 end
 
@@ -1750,209 +1741,104 @@ centrifuge_idle_layers = function(size,speed)
 	local size = number_or_one(size)
 	local speed = number_or_one(speed)
 	return {{
-			filename = 
-				"__base__/graphics/entity/"
-				.."centrifuge/centrifuge-C.png",
-			priority = "extra-high",
-			line_length = 8,
-			width = 119,
-			height = 107,
-			scale = size,
-			frame_count = 64,
-			animation_speed = speed,
-			shift =
-				util.by_pixel(
-					-0.5,
-					-26.5
-				),
-			hr_version = {
-				filename = 
-					"__base__/graphics/entity/"
-					.."centrifuge/hr-centrifuge-C.png",
-				priority = "extra-high",
-				scale = size*0.5,
-				line_length = 8,
-				width = 237,
-				height = 214,
-				frame_count = 64,
-				animation_speed = speed,
-				shift =
-					util.by_pixel(
-						-0.25,
-						-26.5
-					)
-			}
+      filename =
+        "__base__/graphics/entity/"
+        .."centrifuge/hr-centrifuge-C.png",
+      priority = "extra-high",
+      scale = size*0.5,
+      line_length = 8,
+      width = 237,
+      height = 214,
+      frame_count = 64,
+      animation_speed = speed,
+      shift =
+        util.by_pixel(
+          -0.25,
+          -26.5
+        )
 		},{
-			filename = 
-				"__base__/graphics/entity/"
-				.."centrifuge/centrifuge-C-shadow.png",
-			draw_as_shadow = true,
-			priority = "extra-high",
-			line_length = 8,
-			width = 132,
-			height = 74,
-			frame_count = 64,
-			scale = size,
-			animation_speed = speed,
-			shift =
-				util.by_pixel(
-					20,
-					-10
-				),
-			hr_version = {
-				filename = 
-					"__base__/graphics/entity/"
-					.."centrifuge/hr-centrifuge-C-shadow.png",
-				draw_as_shadow = true,
-				priority = "extra-high",
-				scale = size*0.5,
-				line_length = 8,
-				width = 279,
-				height = 152,
-				frame_count = 64,
-				animation_speed = speed,
-				shift =
-					util.by_pixel(
-						16.75,
-						-10
-					)
-			}
+      filename =
+        "__base__/graphics/entity/"
+        .."centrifuge/hr-centrifuge-C-shadow.png",
+      draw_as_shadow = true,
+      priority = "extra-high",
+      scale = size*0.5,
+      line_length = 8,
+      width = 279,
+      height = 152,
+      frame_count = 64,
+      animation_speed = speed,
+      shift =
+        util.by_pixel(
+          16.75,
+          -10
+        )
 		},{
-			filename = 
-				"__base__/graphics/entity/"
-				.."centrifuge/centrifuge-B.png",
-			priority = "extra-high",
-			line_length = 8,
-			width = 78,
-			height = 117,
-			scale = size,
-			frame_count = 64,
-			animation_speed = speed,
-			shift =
-				util.by_pixel(
-					23,
-					6.5
-				),
-			hr_version = {
-				filename = 
-					"__base__/graphics/entity/"
-					.."centrifuge/hr-centrifuge-B.png",
-				priority = "extra-high",
-				scale = size*0.5,
-				line_length = 8,
-				width = 156,
-				height = 234,
-				frame_count = 64,
-				animation_speed = speed,
-				shift =
-					util.by_pixel(
-						23,
-						6.5
-					)
-			}
+      filename =
+        "__base__/graphics/entity/"
+        .."centrifuge/hr-centrifuge-B.png",
+      priority = "extra-high",
+      scale = size*0.5,
+      line_length = 8,
+      width = 156,
+      height = 234,
+      frame_count = 64,
+      animation_speed = speed,
+      shift =
+        util.by_pixel(
+          23,
+          6.5
+        )
 		},{
-			filename = 
-				"__base__/graphics/entity/"
-				.."centrifuge/centrifuge-B-shadow.png",
-			draw_as_shadow = true,
-			priority = "extra-high",
-			line_length = 8,
-			width = 124,
-			height = 74,
-			frame_count = 64,
-			scale = size,
-			animation_speed = speed,
-			shift =
-				util.by_pixel(
-					63,
-					16
-				),
-			hr_version = {
-				filename = 
-					"__base__/graphics/entity/"
-					.."centrifuge/hr-centrifuge-B-shadow.png",
-				draw_as_shadow = true,
-				priority = "extra-high",
-				scale = size*0.5,
-				line_length = 8,
-				width = 251,
-				height = 149,
-				frame_count = 64,
-				animation_speed = speed,
-				shift =
-					util.by_pixel(
-						63.25,
-						15.25
-					)
-			}
+      filename =
+        "__base__/graphics/entity/"
+        .."centrifuge/hr-centrifuge-B-shadow.png",
+      draw_as_shadow = true,
+      priority = "extra-high",
+      scale = size*0.5,
+      line_length = 8,
+      width = 251,
+      height = 149,
+      frame_count = 64,
+      animation_speed = speed,
+      shift =
+        util.by_pixel(
+          63.25,
+          15.25
+        )
 		},{
-			filename = 
-				"__base__/graphics/entity/"
-				.."centrifuge/centrifuge-A.png",
-			priority = "extra-high",
-			line_length = 8,
-			width = 70,
-			height = 123,
-			scale = size,
-			frame_count = 64,
-			animation_speed = speed,
-			shift =
-				util.by_pixel(
-					-26,
-					3.5
-				),
-			hr_version = {
-				filename = 
-					"__base__/graphics/entity/"
-					.."centrifuge/hr-centrifuge-A.png",
-				priority = "extra-high",
-				scale = size*0.5,
-				line_length = 8,
-				width = 139,
-				height = 246,
-				frame_count = 64,
-				animation_speed = speed,
-				shift =
-					util.by_pixel(
-						-26.25,
-						3.5
-					)
-			}
+      filename =
+        "__base__/graphics/entity/"
+        .."centrifuge/hr-centrifuge-A.png",
+      priority = "extra-high",
+      scale = size*0.5,
+      line_length = 8,
+      width = 139,
+      height = 246,
+      frame_count = 64,
+      animation_speed = speed,
+      shift =
+        util.by_pixel(
+          -26.25,
+          3.5
+        )
 		},{
-			filename = 
-				"__base__/graphics/entity/"
-				.."centrifuge/centrifuge-A-shadow.png",
-			priority = "extra-high",
-			draw_as_shadow = true,
-			line_length = 8,
-			width = 108,
-			height = 54,
-			frame_count = 64,
-			scale = size,
-			animation_speed = speed,
-			shift =
-				util.by_pixel(
-					6,
-					27
-				),
-			hr_version = {
-				filename = 
-					"__base__/graphics/entity/"
-					.."centrifuge/hr-centrifuge-A-shadow.png",
-				priority = "extra-high",
-				draw_as_shadow = true,
-				scale = size*0.5,
-				line_length = 8,
-				width = 230,
-				height = 124,
-				frame_count = 64,
-				animation_speed = speed,
-				shift =
-					util.by_pixel(
-						8.5,
-						23.5
-					)
-			}
+      filename =
+        "__base__/graphics/entity/"
+        .."centrifuge/hr-centrifuge-A-shadow.png",
+      priority = "extra-high",
+      draw_as_shadow = true,
+      scale = size*0.5,
+      line_length = 8,
+      width = 230,
+      height = 124,
+      frame_count = 64,
+      animation_speed = speed,
+      shift =
+        util.by_pixel(
+          8.5,
+          23.5
+        )
 	}}
 end
 

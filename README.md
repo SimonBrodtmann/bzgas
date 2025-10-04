@@ -15,6 +15,7 @@ See changelog.txt
 ## Thanks to 
 - [Sakuro](https://github.com/sakuro) (expand options, icon tweaks)
 - [Benjah-bmm27](https://commons.wikimedia.org/wiki/User:Benjah-bmm27) ([Formaldehyde icon](https://commons.wikimedia.org/wiki/File:Formaldehyde-3D-vdW.png), public domain)
+- [cackling fiend](https://mods.factorio.com/user/cackling.fiend) (Update to 2.0)
 
 ### Compatibility
 - [nihilistzsche](https://github.com/nihilistzsche)

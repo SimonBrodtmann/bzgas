@@ -1,7 +1,7 @@
 -- Matter recipes for Krastorio2
 if mods["Krastorio2"] then
 local util = require("data-util");
-local matter = require("__Krastorio2__/lib/public/data-stages/matter-util")
+local matter = require("__Krastorio2__/prototypes/libraries/matter")
 
 data:extend(
 {
@@ -28,7 +28,7 @@ data:extend(
       {
         {"production-science-pack", 1},
         {"utility-science-pack", 1},
-        {"matter-tech-card", 1}
+        {"kr-matter-tech-card", 1}
       },
       time = 45
     }
@@ -37,12 +37,11 @@ data:extend(
 
 local gas_ore_matter = 
 	{
-    item_name = "gas",
-    minimum_conversion_quantity = 100,
-    matter_value = 5,
+	  material = { type = "fluid", name = "gas", amount = 100 },
+	  matter_count = 5,
     energy_required = 1,
     need_stabilizer = false,
     unlocked_by_technology = "gas-matter-processing"
 	}
-matter.createMatterRecipe(gas_ore_matter)
+matter.make_recipes(gas_ore_matter)
 end

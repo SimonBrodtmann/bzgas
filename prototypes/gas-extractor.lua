@@ -2,24 +2,24 @@ local util = require("data-util");
 local futil = require("util")
 
 local ge_ingredients = {
-  {"iron-plate", 10},
-  {"pipe", 10},
-  {"stone-brick", 4},
+  {type="item", name="iron-plate", amount=10},
+  {type="item", name="pipe", amount=10},
+  {type="item", name="stone-brick", amount=4},
 }
 local ge_prereq = {"automation"}
-if mods.bzlead then table.insert(ge_ingredients, {"lead-plate", 4}) end
+if mods.bzlead then table.insert(ge_ingredients, {type="item", name="lead-plate", amount=4}) end
 if mods.Krastorio2 then 
-  table.insert(ge_ingredients, {"sand", 10})
+  table.insert(ge_ingredients, {type="item", name="kr-sand", amount=10})
   ge_prereq = {"kr-stone-processing"}
 elseif mods["aai-industry"] then
-  table.insert(ge_ingredients, {"sand", 10})
+  table.insert(ge_ingredients, {type="item", name="sand", amount=10})
   ge_prereq = {"sand-processing"}
 elseif data.raw.item["silica"] and data.raw.technology["silica-processing"] then
-  table.insert(ge_ingredients, {"silica", 20})
+  table.insert(ge_ingredients, {type="item", name="silica", amount=20})
   ge_prereq = {"silica-processing"}
 end
 
-drilling_rig_circuit_connector_definitions = circuit_connector_definitions.create
+drilling_rig_circuit_connector_definitions = circuit_connector_definitions.create_vector
 (
   universal_connector_template,
   {
@@ -45,7 +45,7 @@ data:extend({
   {
     type = "recipe",
     name = "gas-extractor",
-    result = "gas-extractor",
+    results = {{ type = "item", name = "gas-extractor", amount = 1}},
     enabled = false, -- TODO change
     ingredients = ge_ingredients,
   },
@@ -54,13 +54,13 @@ data:extend({
     name = "gas-extraction",
     icon = "__bzgas__/graphics/technology/gas-processing.png",
     icon_size = 256,
-    prerequisites = ge_prereq,
+    --prerequisites = ge_prereq,
     effects = {
       {type = "unlock-recipe", recipe = "gas-extractor"},
     },
     unit = {
       count = 10,
-      ingredients = mods.Krastorio2 and {{"basic-tech-card", 1}} or {{"automation-science-pack", 1}},
+      ingredients = mods.Krastorio2 and {{"kr-basic-tech-card", 1}} or {{"automation-science-pack", 1}},
       time = 20,
     },
   },
@@ -82,18 +82,18 @@ data:extend({
     energy_source =
     {
       type = "electric",
-      emissions_per_minute = 10,
+      emissions_per_minute = { pollution = 10 },
       usage_priority = "secondary-input"
     },
     output_fluid_box =
     {
-      base_area = 10,
-      base_level = 1,
+      volume = 1000,
       pipe_covers = pipecoverspictures(),
       pipe_connections =
       {
         {
-          positions = { {0, -2}, {2, 0}, {0, 2}, {-2, 0} }
+          direction = defines.direction.north,
+          positions = { {0, -1}, {1, 0}, {0, 1}, {-1, 0} }
         }
       }
     },
@@ -101,10 +101,7 @@ data:extend({
     mining_speed = util.me.finite() and 2 or 1,
     resource_searching_radius = 0.49,
     vector_to_place_result = {0, 0},
-    module_specification =
-    {
-      module_slots = 2
-    },
+    module_slots = 2,
     radius_visualisation_picture =
     {
       filename = "__base__/graphics/entity/pumpjack/pumpjack-radius-visualization.png",
@@ -147,34 +144,38 @@ data:extend({
         shift = futil.by_pixel(-8, 8),
       },
     },
-    animations = {
-      layers = {
-        {
-          filename = "__bzgas__/graphics/entity/gas-extractor-animated.png",
-          priority = "extra-high",
-          width = 267,
-          height = 604,
-          scale = 0.33, -- just under 1/3, for height ~200. Check why height is 604 and not 600
-          frame_count = 100,
-          line_length = 8,
-          animation_speed = 0.5,
-          shift = futil.by_pixel(0, -60),
-        },
-        {
-          stripes = futil.multiplystripes(100, {{
-            filename = "__bzgas__/graphics/entity/gas-extractor-shadow.png",
-            width_in_frames = 1,
-            height_in_frames = 1,
-          }}),
-          priority = "extra-high",
-          width = 331,
-          height = 64,
-          draw_as_shadow = true,
-          frame_count = 100,
-          animation_speed = 0.5,
-          shift = futil.by_pixel(119, 8),
-        },
-      },
+    graphics_set = {
+      animation = {
+        north = {
+          layers = {
+            {
+              filename = "__bzgas__/graphics/entity/gas-extractor-animated.png",
+              priority = "extra-high",
+              width = 267,
+              height = 604,
+              scale = 0.33, -- just under 1/3, for height ~200. Check why height is 604 and not 600
+              frame_count = 100,
+              line_length = 8,
+              animation_speed = 0.5,
+              shift = futil.by_pixel(0, -60),
+            },
+            {
+              stripes = futil.multiplystripes(100, { {
+                filename = "__bzgas__/graphics/entity/gas-extractor-shadow.png",
+                width_in_frames = 1,
+                height_in_frames = 1,
+              } }),
+              priority = "extra-high",
+              width = 331,
+              height = 64,
+              draw_as_shadow = true,
+              frame_count = 100,
+              animation_speed = 0.5,
+              shift = futil.by_pixel(119, 8),
+            },
+          },
+        }
+      }
     },
     vehicle_impact_sound = data.raw["mining-drill"]["pumpjack"].vehicle_impact_sound,
     open_sound = data.raw["mining-drill"]["pumpjack"].open_sound,
